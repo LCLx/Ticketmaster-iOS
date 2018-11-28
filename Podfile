@@ -9,6 +9,9 @@ target 'EventSearch' do
   pod "McPicker"
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'
+  pod "EasyToast"
+  pod "SwiftSpinner"
+  pod 'Kingfisher', '~> 4.0'
   target 'EventSearchTests' do
     inherit! :search_paths
     # Pods for testing
