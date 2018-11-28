@@ -33,7 +33,7 @@ class NetworkService: NSObject {
         Alamofire.request(URLString, parameters: para).validate().responseJSON(completionHandler: {(response) in
             let json = JSON(response.result.value as Any) ;
 //            print(json);
-            finishedCallBack(json["embedded"]["attractions"]);
+            finishedCallBack(json["_embedded"]["attractions"]);
         })
     }
 }

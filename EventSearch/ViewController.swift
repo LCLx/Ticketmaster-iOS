@@ -11,7 +11,7 @@ import McPicker
 import CoreLocation
 import EasyToast
 import SwiftSpinner
-
+import SwiftyJSON
 
 class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDataSource,UITableViewDelegate, CLLocationManagerDelegate{
     
@@ -24,9 +24,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var customBtn: UIButton!
     @IBOutlet weak var AutocompleteTable: UITableView!
     
+    
     var data = ["inputKeyword":"","inputCategory":"all","inputDistance":"10","distanceMeasure": "miles","inputFrom":"current","inputOther":"","lat":"","lon":""];
 //    var chooseCat: UIPickerView!;
-    var autoData = ["1","1","2"];
+    var autoData = JSON();
     var categoryDelegate:UITextFieldDelegate!
     var NetworkClass:NetworkService!
     var locationManager = CLLocationManager()
@@ -66,6 +67,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         locationManager.startUpdatingLocation()
         AutocompleteTable.register(UITableViewCell.self, forCellReuseIdentifier: "AutoTableViewCell")
     }
+    @IBAction func KeywordChange(_ sender: Any) {
+        var req = ["keyword":""]
+        if(keyword.text!.count>0){
+            req["keyword"] = keyword.text
+            NetworkClass.GetAutocomplete(para: req, finishedCallBack: {(result) in
+                self.AutocompleteTable.isHidden = false
+                self.autoData = JSON(result)
+                self.AutocompleteTable.reloadData()
+                })
+        }
+        else
+        {
+            AutocompleteTable.isHidden = true;
+        }
+    }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return true;
@@ -74,6 +90,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder();
+        AutocompleteTable.isHidden = true;
         return true;
     }
 
@@ -133,6 +150,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        AutocompleteTable.reloadData()
     }
     @IBAction func startSerach(_ sender: Any) {
+        AutocompleteTable.isHidden = true;
         var cateMap = ["All":"all","Music":"music","Sports":"sports","Art & theatre":"art_theatre","Film":"film","Miscellaneous":"miscellaneous"];
         data["inputKeyword"] = keyword.text;
         data["inputCategory"] = cateMap[category.text ?? "all"];
@@ -179,11 +197,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
 //        cell.nameLabel.text = meal.name
 //        cell.photoImageView.image = meal.photo
 //        cell.ratingControl.rating = meal.rating
-        cell.textLabel?.text = autoData[indexPath.row];
+        cell.textLabel?.text = autoData[indexPath.row]["name"].string;
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        keyword.text = autoData[indexPath.row];
+        keyword.text = autoData[indexPath.row]["name"].string;
         AutocompleteTable.isHidden = true;
     }
 }

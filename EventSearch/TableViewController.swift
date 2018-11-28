@@ -12,7 +12,7 @@ class TableViewController: UITableViewController {
     
     var rawData:Any!;
     var JSONData = JSON();
-    
+    var prepareData = JSON();
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(rawData)
@@ -108,14 +108,22 @@ class TableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+//        print(2)
+        let des = segue.destination as! TabBarController
+        des.input = prepareData
+        
     }
-    */
-
+ 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        prepareData = JSONData["_embedded"]["events"][indexPath.row]
+//        print(1)
+        self.performSegue(withIdentifier: "JumpToTabBar", sender: self)
+    }
 }
