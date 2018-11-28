@@ -19,6 +19,7 @@
 		675BD7B8219931BD00170C46 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675BD7B6219931BD00170C46 /* LaunchScreen.storyboard */; };
 		675BD7C3219931BE00170C46 /* EventSearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BD7C2219931BE00170C46 /* EventSearchTests.swift */; };
 		6765E58E21A4A51200E50E42 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6765E58D21A4A51200E50E42 /* NetworkService.swift */; };
+		6794222921AF385000FFA451 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6794222821AF385000FFA451 /* UpcomingViewController.swift */; };
 		D9FD85F8D1E55D8A35040C38 /* Pods_EventSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D901672E333781A1B5399BD /* Pods_EventSearch.framework */; };
 		E06DDB9FF6CF08C1B299A1EB /* Pods_EventSearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1482B8E84B88CF055B14FC02 /* Pods_EventSearchTests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +54,7 @@
 		675BD7C2219931BE00170C46 /* EventSearchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventSearchTests.swift; sourceTree = "<group>"; };
 		675BD7C4219931BE00170C46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6765E58D21A4A51200E50E42 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		6794222821AF385000FFA451 /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
 		7B6BE46CF876A96003B4BE8B /* Pods-EventSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventSearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventSearch/Pods-EventSearch.release.xcconfig"; sourceTree = "<group>"; };
 		BF77B1B62B8F0E89A7FD701C /* Pods-EventSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventSearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EventSearch/Pods-EventSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		FD8A5D7D8324650A5169D5B6 /* Pods-EventSearchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EventSearchTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EventSearchTests/Pods-EventSearchTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				674BC91521AD3E04006FB63E /* EventsCell.swift */,
 				671D24B721AE5142009A61FD /* TabBarController.swift */,
 				671D24B921AE70F7009A61FD /* InfoTabController.swift */,
+				6794222821AF385000FFA451 /* UpcomingViewController.swift */,
 			);
 			path = EventSearch;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				674BC91621AD3E04006FB63E /* EventsCell.swift in Sources */,
 				671D24BA21AE70F7009A61FD /* InfoTabController.swift in Sources */,
 				675BD7B0219931BC00170C46 /* ViewController.swift in Sources */,
+				6794222921AF385000FFA451 /* UpcomingViewController.swift in Sources */,
 				6750BDFD21A3F60500616E6D /* ShowDetail.swift in Sources */,
 				6765E58E21A4A51200E50E42 /* NetworkService.swift in Sources */,
 				671D24B821AE5142009A61FD /* TabBarController.swift in Sources */,
