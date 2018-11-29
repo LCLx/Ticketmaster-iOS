@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-
+import GoogleMaps
 class VenueViewController: UIViewController {
     @IBOutlet weak var Address: UILabel!
     @IBOutlet weak var City: UILabel!
@@ -16,13 +16,18 @@ class VenueViewController: UIViewController {
     @IBOutlet weak var OpenHours: UILabel!
     @IBOutlet weak var GeneralRules: UILabel!
     @IBOutlet weak var ChildRules: UILabel!
+    @IBOutlet weak var GoogleMaps: UIView!
+    @IBOutlet weak var NoResults: UILabel!
+    @IBOutlet weak var ScrollView: UIScrollView!
     
     var data = JSON()
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if(data.isEmpty){
-//
-//        }
+        if(data.isEmpty){
+            ScrollView.isHidden = true
+            NoResults.isHidden = false
+            return
+        }
         load()
         // Do any additional setup after loading the view.
     }
@@ -33,6 +38,18 @@ class VenueViewController: UIViewController {
         OpenHours.text = data["boxOfficeInfo"]["openHoursDetail"].string ?? "N/A"
         GeneralRules.text = data["generalInfo"]["generalRule"].string ?? "N/A"
         ChildRules.text = data["generalInfo"]["childRule"].string ?? "N/A"
+//        print("loading...")
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(data["location"]["latitude"].string != nil){
+            let des = segue.destination as! GoogleMapsViewController
+            //        print(data["location"]["latitude"].string)
+            des.lat = Double(data["location"]["latitude"].stringValue)
+            des.lon = Double(data["location"]["longitude"].stringValue)
+        }
+        
+        
+//        print("segueing")
     }
 
     /*

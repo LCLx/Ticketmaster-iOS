@@ -10,7 +10,14 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 class NetworkService: NSObject {
-    
+    struct CustomEncoding: ParameterEncoding {
+        func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+            var request = try! URLEncoding().encode(urlRequest, with: parameters)
+            let urlString = request.url?.absoluteString.replacingOccurrences(of: "%5B%5D=", with: "=")
+            request.url = URL(string: urlString!)
+            return request
+        }
+    }
 //    func GetGeo(finishedCallBack: @escaping (_ result : Any)->()){
 //        var ans = ["lat":"","lon":""];
 //        Alamofire.request("http://ip-api.com/json").validate().responseJSON(completionHandler: {response in
@@ -43,5 +50,22 @@ class NetworkService: NSObject {
             //            print(json);
             finishedCallBack(json);
         })
+    }
+    func GetSpotify(para:Parameters, finishedCallBack: @escaping (_ result : Any)->()){
+        let URLString = "http://localhost:8081/users/reqSpotify";
+        Alamofire.request(URLString, parameters: para, encoding: CustomEncoding()).validate().responseJSON(completionHandler: {(response) in
+            let json = JSON(response.result.value as Any) ;
+            //            print(json);
+            finishedCallBack(json);
+        })
+    }
+    func GetPics(para:Parameters, finishedCallBack: @escaping (_ result : Any)->()){
+        let URLString = "http://localhost:8081/users/reqGooglePics";
+        Alamofire.request(URLString, parameters: para, encoding: CustomEncoding()).validate().responseJSON(completionHandler: {(response) in
+            let json = JSON(response.result.value as Any) ;
+            //            print(json);
+            finishedCallBack(json);
+        })
+        
     }
 }
