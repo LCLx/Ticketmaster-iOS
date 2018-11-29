@@ -25,6 +25,10 @@ class TabBarController: UITabBarController {
         
         let infoTab = self.viewControllers?[0] as! InfoTabController
         infoTab.data = input
+        let venueTab = self.viewControllers?[2] as! VenueViewController
+        venueTab.data = input["_embedded"]["venues"][0]
+        let upcomingTab = self.viewControllers?[3] as! UpcomingViewController
+        upcomingTab.venueName = input["_embedded"]["venues"][0]["name"].stringValue
     }
     @objc func ClickTwitter(){
         let url:URL?=URL.init(string: getTwitterURL())

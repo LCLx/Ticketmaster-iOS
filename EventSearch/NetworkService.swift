@@ -36,4 +36,12 @@ class NetworkService: NSObject {
             finishedCallBack(json["_embedded"]["attractions"]);
         })
     }
+    func GetUpcoming(para:Parameters, finishedCallBack: @escaping (_ result : Any)->()){
+        let URLString = "http://localhost:8081/users/reqUpcoming";
+        Alamofire.request(URLString, parameters: para).validate().responseJSON(completionHandler: {(response) in
+            let json = JSON(response.result.value as Any) ;
+            //            print(json);
+            finishedCallBack(json);
+        })
+    }
 }

@@ -12,6 +12,8 @@ target 'EventSearch' do
   pod "EasyToast"
   pod "SwiftSpinner"
   pod 'Kingfisher', '~> 4.0'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   target 'EventSearchTests' do
     inherit! :search_paths
     # Pods for testing

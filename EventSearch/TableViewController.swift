@@ -10,14 +10,20 @@ import UIKit
 import SwiftyJSON
 class TableViewController: UITableViewController {
     
-    var rawData:Any!;
+    var rawData = JSON();
     var JSONData = JSON();
     var prepareData = JSON();
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(rawData)
-        JSONData = JSON(rawData)
+        JSONData = rawData
         print(JSONData["_embedded"]["events"].count)
+//        if(JSONData["_embedded"]["events"].count == 0){
+//            tableView.isHidden = true
+//        }
+//        else{
+//            tableView.isHidden = false;
+//        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

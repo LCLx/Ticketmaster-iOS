@@ -23,6 +23,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     @IBOutlet weak var currentBtn: UIButton!
     @IBOutlet weak var customBtn: UIButton!
     @IBOutlet weak var AutocompleteTable: UITableView!
+    @IBOutlet weak var LocalTable: UIView!
+    @IBOutlet weak var NoResults: UIView!
     
     
     var data = ["inputKeyword":"","inputCategory":"all","inputDistance":"10","distanceMeasure": "miles","inputFrom":"current","inputOther":"","lat":"","lon":""];
@@ -31,12 +33,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
     var categoryDelegate:UITextFieldDelegate!
     var NetworkClass:NetworkService!
     var locationManager = CLLocationManager()
-    var resultFromServer:Any!
+    var resultFromServer = JSON()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         keyword.delegate = self;
-
+//        LocalTable.isHidden = false
         categoryDelegate = categoryPickerDelegate();
         category.delegate = categoryDelegate;
 //        sourcetest = categoryPickerDelegate();
@@ -109,6 +111,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(self.resultFromServer["_embedded"]["events"].isEmpty){
+            return
+        }
         let des = segue.destination as! TableViewController
         des.rawData = resultFromServer;
     }
@@ -173,9 +178,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegat
         SwiftSpinner.show("Searching for events...")
         NetworkClass.GetTicketMaster(para: data, finishedCallBack: {(result) in
 //            print(result);
-            self.resultFromServer = result
+            self.resultFromServer = JSON(result)
             SwiftSpinner.hide()
-            self.performSegue(withIdentifier: "JumpToTableView", sender: self)
+            if(self.resultFromServer["_embedded"]["events"].isEmpty){
+                self.performSegue(withIdentifier: "JumpToNoResults", sender: self)
+            }
+            else{
+                self.performSegue(withIdentifier: "JumpToTableView", sender: self)
+            }
             //        prepare(for: triggerToDetail(), sender: self);
         
         })
